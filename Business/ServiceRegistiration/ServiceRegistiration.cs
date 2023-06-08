@@ -20,20 +20,20 @@ namespace Business.ServiceRegistiration
         {
             services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
 
-            services.AddScoped<IColorRepository, EfEntityColorRepository>();
-            services.AddScoped<IColorService, ColorManager>();
+            //services.AddScoped<IColorRepository, EfEntityColorRepository>();
+            //services.AddScoped<IColorService, ColorManager>();
 
-            services.AddScoped<ICategoryRepository, EfEntityCategoryRepository>();
-            services.AddScoped<ICategoryService, CategoryManager>();
+            //services.AddScoped<ICategoryRepository, EfEntityCategoryRepository>();
+            //services.AddScoped<ICategoryService, CategoryManager>();
 
-            services.AddScoped<IProvinceRepository, EfEntityProvinceRepository>();
-            services.AddScoped<IProvinceService, ProvinceManager>();
+            //services.AddScoped<IProvinceRepository, EfEntityProvinceRepository>();
+            //services.AddScoped<IProvinceService, ProvinceManager>();
 
-            services.AddScoped<IStoreRepository, EfEntityStoreRepository>();
-            services.AddScoped<IStoreService, StoreManager>();
+            //services.AddScoped<IStoreRepository, EfEntityStoreRepository>();
+            //services.AddScoped<IStoreService, StoreManager>();
 
-            services.AddScoped<IBookRepository, EfEntityBookRepository>();
-            services.AddScoped<IBookService, BookManager>();
+            //services.AddScoped<IBookRepository, EfEntityBookRepository>();
+            //services.AddScoped<IBookService, BookManager>();
         }
     }
 }
