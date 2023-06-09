@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,9 @@ namespace DataAccess.Concrete
         public DbSet<Color> Colors { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Store> Store { get; set; }
+        public DbSet<BookImage> BookImages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaim { get; set; }
     }
 }

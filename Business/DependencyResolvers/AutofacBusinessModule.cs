@@ -3,9 +3,12 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +35,20 @@ namespace Business.DependencyResolvers
 
             builder.RegisterType<EfEntityBookRepository>().As<IBookRepository>().SingleInstance();
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
+
+            builder.RegisterType<EfEntityBookImageRepository>().As<IBookImageRepository>().SingleInstance();
+            builder.RegisterType<BookImageManager>().As<IBookImageService>().SingleInstance();
+
+            builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
+
+            builder.RegisterType<EfEntityUserRepository>().As<IUserRepository>().SingleInstance();
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly(); //Calisan uygulama icerisinde
 

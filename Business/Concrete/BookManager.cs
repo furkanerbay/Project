@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,8 +23,11 @@ namespace Business.Concrete
         {
             _bookRepository = bookRepository;
         }
+        //[ValidationAspect(typeof(BookValidator))]
+        [SecuredOperation("admin")]
         public async Task<Result> Add(Book entity)
         {
+            //IResult result = BusinessRules.Run(CheckIfBookNameExists(entity.BookName));
             await _bookRepository.Add(entity);
             return new SuccessResult(Messages.BookAdded);
         }
@@ -47,6 +54,18 @@ namespace Business.Concrete
         {
             await _bookRepository.Update(entity);
             return new SuccessResult(Messages.BookUpdated);
+        }
+
+        private IResult CheckIfBookNameExists(string bookName)
+        {
+            var result = _bookRepository.GetAll(b => b.BookName == bookName).Result.Any();
+
+            if(result)
+            {
+                return new ErrorResult();
+            }
+
+            return new SuccessResult();
         }
     }
 }

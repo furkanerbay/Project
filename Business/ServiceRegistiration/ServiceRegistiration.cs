@@ -2,6 +2,7 @@
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,7 @@ namespace Business.ServiceRegistiration
         public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddScoped<IColorRepository, EfEntityColorRepository>();
             //services.AddScoped<IColorService, ColorManager>();
 
