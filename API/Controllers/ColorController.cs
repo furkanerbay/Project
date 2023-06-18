@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.RequestParameter;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,24 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] Pagination pagination)
         {
-            var result = await _colorService.GetAll();
-            if(result.Success)
+            //var result = await _colorService.GetAll();
+            //if(result.Success)
+            //{
+            //    return Ok(result);
+            //}
+            //return BadRequest(result);
+
+            var totalCount = _colorService.GetAll().Result.Data.Count;
+            var result = _colorService.GetAll().Result.Data.Skip(pagination.Page * pagination.Size).Take(pagination.Size);
+
+            return Ok(new
             {
-                return Ok(result);
-            }
-            return BadRequest(result);
+                totalCount,
+                result
+            });
+
         }
 
         [HttpPost]
@@ -56,6 +67,18 @@ namespace API.Controllers
             {
                 return Ok(result);
             }    
+            return BadRequest(result);
+        }
+
+        [HttpGet("getalltypes")]
+        public async Task<IActionResult> GetAllTypes()
+        {
+
+            var result = await _colorService.GetAll();
+            if (result.Success)
+            {
+                return Ok(new { result.Data });
+            }
             return BadRequest(result);
         }
 

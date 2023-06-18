@@ -21,6 +21,9 @@ namespace Business.ServiceRegistiration
         {
             services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped<IOrderRepository, EfEntityOrderRepository>();
+            //services.AddScoped<IOrderService, OrderManager>();
+
             //services.AddScoped<IColorRepository, EfEntityColorRepository>();
             //services.AddScoped<IColorService, ColorManager>();
 

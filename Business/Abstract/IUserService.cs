@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(User user);
         void Add(User user);
         User GetByMail(string email);
+        Task<IDataResult<List<User>>> GetAll();
     }
 }

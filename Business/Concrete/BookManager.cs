@@ -7,6 +7,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Business.Concrete
             _bookRepository = bookRepository;
         }
         //[ValidationAspect(typeof(BookValidator))]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public async Task<Result> Add(Book entity)
         {
             //IResult result = BusinessRules.Run(CheckIfBookNameExists(entity.BookName));
@@ -48,6 +49,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Book>>
                 (await _bookRepository.GetAll(), Messages.BookGetAll);
+        }
+
+        public async Task<IDataResult<List<BookDetailsDto>>> GetAllDetailsDto()
+        {
+            return new SuccessDataResult<List<BookDetailsDto>>
+                (await _bookRepository.GetAllDetailsDto(), "Kitap detaylari getirildi.");
         }
 
         public async Task<Result> Update(Book entity)

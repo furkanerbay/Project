@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace Business.Abstract
         Task<Result> Add(Book entity);
         Task<Result> Delete(Book entity);
         Task<Result> Update(Book entity);
+
+        Task<IDataResult<List<BookDetailsDto>>> GetAllDetailsDto();
     }
 }

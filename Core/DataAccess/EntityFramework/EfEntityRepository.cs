@@ -64,5 +64,12 @@ namespace Core.DataAccess.EntityFramework
             updateEntity.State = EntityState.Modified;
             await _tContext.SaveChangesAsync();
         }
+
+        public void UpdateNotAsync(TEntity entity)
+        {
+            var updateEntity = _tContext.Entry(entity);
+            updateEntity.State = EntityState.Modified;
+            _tContext.SaveChanges();
+        }
     }
 }

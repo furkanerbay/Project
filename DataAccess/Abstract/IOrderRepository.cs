@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IBookRepository : IEntityRepository<Book>
+    public interface IOrderRepository : IEntityRepository<Order>
     {
-        Task<List<BookDetailsDto>> GetAllDetailsDto();
+        Task<List<OrderDetailsDto>> GetAllOrderDetailsDto();
     }
 }

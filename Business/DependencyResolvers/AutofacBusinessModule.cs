@@ -33,6 +33,8 @@ namespace Business.DependencyResolvers
             builder.RegisterType<EfEntityStoreRepository>().As<IStoreRepository>().SingleInstance();
             builder.RegisterType<StoreManager>().As<IStoreService>().SingleInstance();
 
+            
+
             builder.RegisterType<EfEntityBookRepository>().As<IBookRepository>().SingleInstance();
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
 
@@ -49,6 +51,10 @@ namespace Business.DependencyResolvers
 
             builder.RegisterType<EfEntityUserRepository>().As<IUserRepository>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+
+            builder.RegisterType<EfEntityOrderRepository>().As<IOrderRepository>().SingleInstance();
+            builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly(); //Calisan uygulama icerisinde
 

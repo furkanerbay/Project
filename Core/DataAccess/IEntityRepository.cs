@@ -18,5 +18,6 @@ namespace Core.DataAccess
         Task Update(T entity);
         T GetNoAsync(Expression<Func<T,bool>> filter);
         List<T> GetAllNoAsync(Expression<Func<T,bool>> filter = null);
+        void UpdateNotAsync(T entity);
     }
 }

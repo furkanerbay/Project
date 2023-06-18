@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.RequestParameter;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,30 @@ namespace API.Controllers
             _bookService = bookService;
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var result = await _bookService.GetAll();
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
+
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllDetails([FromQuery] Pagination pagination)
         {
-            var result = await _bookService.GetAll();
-            if (result.Success)
+            var totalCount = _bookService.GetAllDetailsDto().Result.Data.Count();
+            var result = _bookService.GetAllDetailsDto().Result.Data.Skip(pagination.Page * pagination.Size)
+            .Take(pagination.Size);
+
+            return Ok(new
             {
-                return Ok(result);
-            }
-            return BadRequest(result);
+                totalCount,
+                result
+            });
+
         }
 
         [HttpPost]

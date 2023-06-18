@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Core.Entities.Concrete;
+using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -30,6 +31,11 @@ namespace Business.Concrete
         public User GetByMail(string email)
         {
             return _userRepository.GetNoAsync(u => u.EMail == email);
+        }
+
+        public async Task<IDataResult<List<User>>> GetAll()
+        {
+            return new SuccessDataResult<List<User>>(await _userRepository.GetAll(),"Kisiler getirildi.");
         }
     }
 }
